@@ -28,7 +28,8 @@ choice = st.sidebar.selectbox("Select an option", menu)
 
 # 📌 Home Page
 if choice == "Home":
-    st.write("Welcome to your **Personal Library Manager!** 📖")
+    st.write("Welcome to My **Personal Library Manager!** 📖")
+    st.write("Deployed by **Mobina Khatoon!** 📖")
 
 # 📌 Add a Book
 elif choice == "Add a Book":
