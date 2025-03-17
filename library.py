@@ -4,31 +4,31 @@ import os
 
 LIBRARY_FILE = "library.json"
 
-# Load Library
+# Function to Load Library
 def load_library():
     if os.path.exists(LIBRARY_FILE):
         with open(LIBRARY_FILE, "r") as file:
             return json.load(file)
     return []
 
-# Save Library
+# Function to Save Library
 def save_library(library):
     with open(LIBRARY_FILE, "w") as file:
         json.dump(library, file, indent=4)
 
-# Initialize
+# Initialize Library
 library = load_library()
 
 # Streamlit UI
 st.title("📚 Personal Library Manager")
 
-# Menu Options
+# Sidebar Menu
 menu = ["Home", "Add a Book", "Remove a Book", "Search Books", "View All Books", "Statistics"]
 choice = st.sidebar.selectbox("Select an option", menu)
 
 # 📌 Home Page
 if choice == "Home":
-    st.write("Welcome to your Personal Library Manager!")
+    st.write("Welcome to your **Personal Library Manager!** 📖")
 
 # 📌 Add a Book
 elif choice == "Add a Book":
@@ -42,7 +42,7 @@ elif choice == "Add a Book":
     if st.button("Add Book"):
         library.append({"title": title, "author": author, "year": int(year), "genre": genre, "read": read_status})
         save_library(library)
-        st.success(f"Book '{title}' added successfully!")
+        st.success(f"✅ Book '{title}' added successfully!")
 
 # 📌 Remove a Book
 elif choice == "Remove a Book":
@@ -53,7 +53,7 @@ elif choice == "Remove a Book":
     if st.button("Remove"):
         library = [book for book in library if book["title"] != book_to_remove]
         save_library(library)
-        st.success(f"Book '{book_to_remove}' removed successfully!")
+        st.success(f"✅ Book '{book_to_remove}' removed successfully!")
 
 # 📌 Search for a Book
 elif choice == "Search Books":
@@ -66,7 +66,7 @@ elif choice == "Search Books":
             for book in results:
                 st.write(f"📖 **{book['title']}** by {book['author']} ({book['year']}) - {book['genre']} - {'✅ Read' if book['read'] else '❌ Unread'}")
         else:
-            st.warning("No matching books found.")
+            st.warning("❌ No matching books found.")
 
 # 📌 View All Books
 elif choice == "View All Books":
@@ -75,7 +75,7 @@ elif choice == "View All Books":
         for book in library:
             st.write(f"📖 **{book['title']}** by {book['author']} ({book['year']}) - {book['genre']} - {'✅ Read' if book['read'] else '❌ Unread'}")
     else:
-        st.warning("No books in the library.")
+        st.warning("❌ No books in the library.")
 
 # 📌 Display Statistics
 elif choice == "Statistics":
